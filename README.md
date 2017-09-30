@@ -1,5 +1,6 @@
 # fbpageplc
 Fetch posts, likes, comments of a public facebook page.
+getting facebook posts of a page github using python
 
 ## Getting posts form a public page
 ### get_posts(pagename, access_token, start_date, end_date)
