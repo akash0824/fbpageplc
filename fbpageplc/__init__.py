@@ -35,7 +35,11 @@ def get_posts(pagename, access_token, start_date="", end_date=""):
         try:
             fulldata += data["data"]       
         except:
-            fulldata += data["posts"]["data"]
+            try:
+                fulldata += data["posts"]["data"]
+            except:
+                print(data["error"]["message"])
+                break
 
         print("\r" + str(len(fulldata)) + " posts gathered.", end="")
     
@@ -49,7 +53,7 @@ def get_posts(pagename, access_token, start_date="", end_date=""):
             except:
                 break
 
-    print("\r" + str(len(fulldata)) + " posts gathered.", end="")
+    print("\r" + str(len(fulldata)) + " posts gathered.")
     return (fulldata)
 #########################################################X X X X X X X X X X X X#########################################################
 
@@ -96,7 +100,7 @@ def get_likes(post_id, access_token):
             except:
                 break
 
-    print("\r" + str(len(fulldata)) + " likes gathered.", end="")
+    print("\r" + str(len(fulldata)) + " likes gathered for " + post_id)
     return (fulldata)
 #########################################################X X X X X X X X X X X X#########################################################
 
@@ -143,6 +147,6 @@ def get_comments(post_id, access_token):
             except:
                 break
 
-    print("\r" + str(len(fulldata)) + " comments gathered for " + post_id, end="")
+    print("\r" + str(len(fulldata)) + " comments gathered for " + post_id)
     return (fulldata)
 #########################################################X X X X X X X X X X X X#########################################################
