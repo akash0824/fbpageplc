@@ -1,6 +1,20 @@
+#########################################################   Importing Packages  #########################################################
+#########################################################################################################################################
 import requests
 import json
+#########################################################X X X X X X X X X X X X#########################################################
 
+
+
+
+
+
+
+
+
+
+#####################################################   Function for getting Posts  #####################################################
+#########################################################################################################################################
 def get_posts(pagename, access_token, start_date="", end_date=""):
 
     url = "https://graph.facebook.com/v2.10/" + pagename
@@ -37,10 +51,19 @@ def get_posts(pagename, access_token, start_date="", end_date=""):
 
     print("\r" + str(len(fulldata)) + " posts gathered.", end="")
     return (fulldata)
+#########################################################X X X X X X X X X X X X#########################################################
 
 
 
 
+
+
+
+
+
+
+#####################################################   Function for getting likes  #####################################################
+#########################################################################################################################################
 def get_likes(post_id, access_token):
 
     url = "https://graph.facebook.com/v2.10/" + post_id
@@ -75,3 +98,51 @@ def get_likes(post_id, access_token):
 
     print("\r" + str(len(fulldata)) + " likes gathered.", end="")
     return (fulldata)
+#########################################################X X X X X X X X X X X X#########################################################
+
+
+
+
+
+
+
+
+
+
+###################################################   Function for getting comments  ####################################################
+#########################################################################################################################################
+def get_comments(post_id, access_token):
+
+    url = "https://graph.facebook.com/v2.10/" + post_id
+
+    url = url + "?fields=comments&access_token=" + access_token
+
+    fulldata = []
+    while True:
+
+        page = requests.get(url)
+        res = page.json()
+        #print(res)
+
+        try:
+            fulldata += res["data"]       
+        except:
+            try:
+                fulldata += res["comments"]["data"]
+            except:
+                pass
+
+        print("\r" + str(len(fulldata)) + " comments gathered for " + post_id, end="")
+
+        try:
+            url = res["paging"]["next"]
+        except:
+            try:
+                url = res["comments"]["paging"]["next"]
+                url = url.replace("limit=25","limit=100")
+            except:
+                break
+
+    print("\r" + str(len(fulldata)) + " comments gathered for " + post_id, end="")
+    return (fulldata)
+#########################################################X X X X X X X X X X X X#########################################################
