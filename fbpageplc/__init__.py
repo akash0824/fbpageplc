@@ -2,13 +2,12 @@
 #########################################################################################################################################
 import requests
 import json
-import sys
 #########################################################X X X X X X X X X X X X#########################################################
 
 
 
 
-version = sys.version_info[0]
+
 
 
 
@@ -41,11 +40,8 @@ def get_posts(pagename, access_token, start_date="", end_date=""):
             except:
                 print(data["error"]["message"])
                 break
-        
-        if version <= 2:
-            print("\r" + str(len(fulldata)) + " posts gathered.")
-        else:
-            print("\r" + str(len(fulldata)) + " posts gathered.", end="")
+
+        print("\r" + str(len(fulldata)) + " posts gathered.", end="")
     
         try:
             url = data["posts"]["paging"]["next"]
@@ -92,10 +88,8 @@ def get_likes(post_id, access_token):
                 fulldata += res["likes"]["data"]
             except:
                 pass
-        if version <= 2:
-            print("\r" + str(len(fulldata)) + " likes gathered for " + post_id)
-        else:
-            print("\r" + str(len(fulldata)) + " likes gathered for " + post_id, end="")
+
+        print("\r" + str(len(fulldata)) + " likes gathered for " + post_id, end="")
 
         try:
             url = res["paging"]["next"]
@@ -141,10 +135,8 @@ def get_comments(post_id, access_token):
                 fulldata += res["comments"]["data"]
             except:
                 pass
-        if version <= 2:
-            print("\r" + str(len(fulldata)) + " comments gathered for " + post_id)
-        else:
-            print("\r" + str(len(fulldata)) + " comments gathered for " + post_id, end="")
+
+        print("\r" + str(len(fulldata)) + " comments gathered for " + post_id, end="")
 
         try:
             url = res["paging"]["next"]
