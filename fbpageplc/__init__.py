@@ -1,6 +1,5 @@
 #########################################################   Importing Packages  #########################################################
 #########################################################################################################################################
-from __future__ import print_function
 import requests
 import json
 #########################################################X X X X X X X X X X X X#########################################################
@@ -42,7 +41,7 @@ def get_posts(pagename, access_token, start_date="", end_date=""):
                 print(data["error"]["message"])
                 break
 
-        print("\r" + str(len(fulldata)) + " posts gathered.", end="")
+        print("Gathering posts....This will take sometime....")
     
         try:
             url = data["posts"]["paging"]["next"]
@@ -54,7 +53,7 @@ def get_posts(pagename, access_token, start_date="", end_date=""):
             except:
                 break
 
-    print("\r" + str(len(fulldata)) + " posts gathered.")
+    print("Total " + str(len(fulldata)) + " posts gathered.")
     return (fulldata)
 #########################################################X X X X X X X X X X X X#########################################################
 
@@ -90,7 +89,7 @@ def get_likes(post_id, access_token):
             except:
                 pass
 
-        print("\r" + str(len(fulldata)) + " likes gathered for " + post_id, end="")
+        print("Gathering likes for " + post_id + "....This will take sometime....")
 
         try:
             url = res["paging"]["next"]
@@ -101,7 +100,7 @@ def get_likes(post_id, access_token):
             except:
                 break
 
-    print("\r" + str(len(fulldata)) + " likes gathered for " + post_id)
+    print("Total " + str(len(fulldata)) + " likes gathered for " + post_id)
     return (fulldata)
 #########################################################X X X X X X X X X X X X#########################################################
 
@@ -137,7 +136,7 @@ def get_comments(post_id, access_token):
             except:
                 pass
 
-        print("\r" + str(len(fulldata)) + " comments gathered for " + post_id, end="")
+        print("Gathering comments for " + post_id + "....This will take sometime....")
 
         try:
             url = res["paging"]["next"]
@@ -148,6 +147,6 @@ def get_comments(post_id, access_token):
             except:
                 break
 
-    print("\r" + str(len(fulldata)) + " comments gathered for " + post_id)
+    print("Total " + str(len(fulldata)) + " comments gathered for " + post_id)
     return (fulldata)
 #########################################################X X X X X X X X X X X X#########################################################
